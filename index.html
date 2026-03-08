@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Women's Day Surprise ❤️</title>
+<title>Pooja Surprise ❤️</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
 
@@ -18,14 +18,17 @@ justify-content:center;
 align-items:center;
 background:linear-gradient(135deg,#ff9a9e,#fad0c4,#fbc2eb);
 overflow:hidden;
-color:white;
 text-align:center;
+color:black;
 }
 
 .container{
 max-width:600px;
 padding:30px;
-animation:fadeIn 2s;
+}
+
+.hidden{
+display:none;
 }
 
 h1{
@@ -33,35 +36,46 @@ font-family:'Great Vibes',cursive;
 font-size:55px;
 }
 
-p{
-font-size:20px;
-}
-
 button{
-margin-top:25px;
-padding:15px 35px;
+padding:15px 30px;
 border:none;
 border-radius:30px;
+background:#ff4e8a;
+color:white;
 font-size:18px;
 cursor:pointer;
-background:linear-gradient(45deg,#ff4e8a,#ff9a9e);
-color:white;
-box-shadow:0 0 15px rgba(255,255,255,0.6);
-transition:all .3s ease;
+margin-top:20px;
 }
 
 button:hover{
-transform:scale(1.1);
-box-shadow:0 0 25px rgba(255,255,255,1);
+transform:scale(1.05);
 }
 
-.hidden{
-display:none;
+/* glowing name */
+
+.glow{
+font-size:70px;
+font-family:'Great Vibes',cursive;
+color:white;
+text-shadow:0 0 10px #ff4da6,0 0 40px #ff4da6;
+animation:glowPulse 2s infinite alternate;
 }
 
-@keyframes fadeIn{
-from{opacity:0; transform:translateY(30px)}
-to{opacity:1; transform:translateY(0)}
+@keyframes glowPulse{
+from{ text-shadow:0 0 10px #ff4da6 }
+to{ text-shadow:0 0 40px #ff99cc }
+}
+
+/* photo */
+
+.memory{
+margin-top:20px;
+}
+
+.memory img{
+width:260px;
+border-radius:20px;
+box-shadow:0 0 20px rgba(0,0,0,0.3);
 }
 
 /* floating hearts */
@@ -86,13 +100,8 @@ background:red;
 border-radius:50%;
 }
 
-.heart:before{
-top:-10px;
-}
-
-.heart:after{
-left:-10px;
-}
+.heart:before{top:-10px;}
+.heart:after{left:-10px;}
 
 @keyframes float{
 0%{transform:translateY(100vh) rotate(45deg);opacity:0}
@@ -100,256 +109,190 @@ left:-10px;
 100%{transform:translateY(-10vh) rotate(45deg);opacity:0}
 }
 
-/* glowing name */
-
-.glow-name{
-font-family:'Great Vibes',cursive;
-font-size:65px;
-margin:10px;
-color:white;
-text-shadow:
-0 0 10px #ff4da6,
-0 0 20px #ff4da6,
-0 0 40px #ff66b3;
-animation:glowPulse 2s infinite alternate;
-}
-
-@keyframes glowPulse{
-from{ text-shadow:0 0 10px #ff4da6 }
-to{ text-shadow:0 0 40px #ff99cc }
-}
-
-/* confetti */
-
-.confetti{
-position:absolute;
-width:10px;
-height:10px;
-animation:confettiFall 4s linear infinite;
-}
-
-@keyframes confettiFall{
-0%{transform:translateY(-10vh) rotate(0deg)}
-100%{transform:translateY(110vh) rotate(360deg)}
-}
-
-/* explosion hearts */
-
-.explosion-heart{
-position:absolute;
-width:15px;
-height:15px;
-background:red;
-transform:rotate(45deg);
-}
-
-.explosion-heart:before,
-.explosion-heart:after{
-content:'';
-position:absolute;
-width:15px;
-height:15px;
-background:red;
-border-radius:50%;
-}
-
-.explosion-heart:before{
-top:-7px;
-}
-
-.explosion-heart:after{
-left:-7px;
-}
-
-/* love letter */
-
-.letter-box{
-position:fixed;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-background:white;
-color:#333;
-padding:40px;
-border-radius:20px;
-width:80%;
-max-width:400px;
-box-shadow:0 0 40px rgba(0,0,0,0.3);
-z-index:1000;
-}
-
-.letter-box h2{
-font-family:'Great Vibes',cursive;
-color:#ff4da6;
-}
-
 </style>
 </head>
 
 <body>
 
-<audio id="music" loop>
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7b4d7ef1bb.mp3?filename=romantic-love-112199.mp3" type="audio/mp3">
-</audio>
-
 <div class="container">
 
-<div id="screen0">
+<!-- PASSWORD SCREEN -->
+
+<div id="passwordScreen">
+
+<h1>Secret Surprise 🔐</h1>
+
+<p>Only Pooja can unlock this</p>
+
+<input type="password" id="pass" placeholder="Enter Password">
+
+<br>
+
+<button onclick="checkPassword()">Unlock</button>
+
+<p id="wrong" style="color:red;"></p>
+
+</div>
+
+<!-- MAIN CONTENT -->
+
+<div id="mainContent" class="hidden">
+
 <h1>A small surprise...</h1>
-<p>For someone very special 💖</p>
-<button onclick="start()">Start the Surprise</button>
+
+<p>For someone very special ❤️</p>
+
+<button onclick="startJourney()">Start</button>
+
 </div>
 
-<div id="screen1" class="hidden">
+<!-- JOURNEY -->
+
+<div id="step1" class="hidden">
+
 <p>Before we start... I want to tell you something.</p>
-<button onclick="next(2)">Click to Reveal</button>
+
+<button onclick="step2()">Next</button>
+
 </div>
 
-<div id="screen2" class="hidden">
-<p>"A strong woman stands up for herself. A stronger woman stands up for everyone else."</p>
-<button onclick="next(3)">Next Surprise ✨</button>
-</div>
+<div id="step2" class="hidden">
 
-<div id="screen3" class="hidden">
 <p>You inspire me every single day.</p>
-<button onclick="next(4)">One More Surprise 🌸</button>
-</div>
 
-<div id="screen4" class="hidden">
-<p>You are not just amazing today… you are amazing every day.</p>
-<button onclick="next(5)">Final Surprise 🎁</button>
-</div>
-
-<div id="screen5" class="hidden">
-<h1>HAPPY WOMEN'S DAY ❤️</h1>
-<div class="glow-name">Pooja</div>
-<p>To the most incredible woman in my life.</p>
-<p>You inspire me, support me, and make my life brighter every day. I'm lucky to have you.</p>
-<button onclick="openLetter()">Open Secret Letter 💌</button>
-</div>
+<button onclick="showLetter()">Continue</button>
 
 </div>
 
-<div id="loveLetter" class="hidden letter-box">
-<h2>For You, Pooja ❤️</h2>
+<!-- TYPING LETTER -->
 
-<p>
-From the moment you came into my life, everything became brighter.
-Your smile, your strength, and your kindness inspire me every single day.
-</p>
+<div id="letterSection" class="hidden">
 
-<p>
-Today is Women's Day, but honestly you deserve to be celebrated every day.
-</p>
+<h1>For You Pooja ❤️</h1>
 
-<p>
-I'm truly lucky to have you in my life.
-</p>
+<p id="letterText"></p>
 
-<p>
-With love NP❤️
-</p>
+<button onclick="showMemory()">One More Thing</button>
 
-<button onclick="closeLetter()">Close</button>
+</div>
+
+<!-- MEMORY PHOTO -->
+
+<div id="memorySection" class="hidden">
+
+<h1>One of my favourite memories</h1>
+
+<div class="memory">
+
+<img src="IMG20251230201854.jpg">
+
+</div>
+
+<button onclick="finalMessage()">Final Surprise</button>
+
+</div>
+
+<!-- FINAL -->
+
+<div id="finalSection" class="hidden">
+
+<h1>Happy Women's Day</h1>
+
+<div class="glow">Pooja</div>
+
+<p>You make my life brighter every day ❤️</p>
+
+</div>
+
 </div>
 
 <script>
 
-function start(){
-document.getElementById("screen0").classList.add("hidden");
-document.getElementById("screen1").classList.remove("hidden");
-document.getElementById("music").play();
+/* password */
+
+function checkPassword(){
+
+let pass=document.getElementById("pass").value;
+
+if(pass==="NP"){
+document.getElementById("passwordScreen").classList.add("hidden");
+document.getElementById("mainContent").classList.remove("hidden");
+}
+else{
+document.getElementById("wrong").innerText="Wrong password ❤️";
 }
 
-function next(num){
-
-for(let i=1;i<=5;i++){
-let s=document.getElementById("screen"+i);
-if(s) s.classList.add("hidden");
 }
 
-document.getElementById("screen"+num).classList.remove("hidden");
+/* steps */
 
-if(num===5){
-launchConfetti();
-heartExplosion();
+function startJourney(){
+document.getElementById("mainContent").classList.add("hidden");
+document.getElementById("step1").classList.remove("hidden");
 }
+
+function step2(){
+document.getElementById("step1").classList.add("hidden");
+document.getElementById("step2").classList.remove("hidden");
+}
+
+/* typing letter */
+
+function showLetter(){
+
+document.getElementById("step2").classList.add("hidden");
+document.getElementById("letterSection").classList.remove("hidden");
+
+let text="From the moment you came into my life, everything became brighter. Your smile, your strength, and your kindness inspire me every single day. Today is Women's Day, but honestly you deserve to be celebrated every day. I am truly lucky to have you in my life.";
+
+let i=0;
+
+function type(){
+if(i<text.length){
+document.getElementById("letterText").innerHTML+=text.charAt(i);
+i++;
+setTimeout(type,40);
+}
+}
+
+type();
+
+}
+
+/* memory */
+
+function showMemory(){
+
+document.getElementById("letterSection").classList.add("hidden");
+document.getElementById("memorySection").classList.remove("hidden");
+
+}
+
+/* final */
+
+function finalMessage(){
+
+document.getElementById("memorySection").classList.add("hidden");
+document.getElementById("finalSection").classList.remove("hidden");
 
 }
 
 /* floating hearts */
 
 function createHeart(){
-const heart=document.createElement("div");
+
+let heart=document.createElement("div");
 heart.className="heart";
 heart.style.left=Math.random()*100+"vw";
 heart.style.animationDuration=5+Math.random()*5+"s";
+
 document.body.appendChild(heart);
 
-setTimeout(()=>{heart.remove()},10000);
+setTimeout(()=>heart.remove(),10000);
+
 }
 
 setInterval(createHeart,500);
-
-/* confetti */
-
-function launchConfetti(){
-
-for(let i=0;i<80;i++){
-
-let conf=document.createElement("div");
-conf.className="confetti";
-conf.style.left=Math.random()*100+"vw";
-conf.style.backgroundColor=`hsl(${Math.random()*360},100%,70%)`;
-conf.style.animationDuration=3+Math.random()*3+"s";
-
-document.body.appendChild(conf);
-
-}
-
-}
-
-/* heart explosion */
-
-function heartExplosion(){
-
-for(let i=0;i<120;i++){
-
-let heart=document.createElement("div");
-heart.className="explosion-heart";
-
-heart.style.left="50vw";
-heart.style.top="50vh";
-
-let angle=Math.random()*2*Math.PI;
-let distance=200+Math.random()*300;
-
-let x=Math.cos(angle)*distance;
-let y=Math.sin(angle)*distance;
-
-heart.animate([
-{transform:"translate(0,0) rotate(45deg)",opacity:1},
-{transform:`translate(${x}px,${y}px) rotate(45deg)`,opacity:0}
-],{
-duration:2000,
-easing:"ease-out"
-});
-
-document.body.appendChild(heart);
-
-setTimeout(()=>{heart.remove()},2000);
-
-}
-
-}
-
-function openLetter(){
-document.getElementById("loveLetter").classList.remove("hidden");
-}
-
-function closeLetter(){
-document.getElementById("loveLetter").classList.add("hidden");
-}
 
 </script>
 
